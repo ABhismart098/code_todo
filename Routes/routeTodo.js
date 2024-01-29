@@ -5,7 +5,7 @@ const router = express.Router();
 const Todo = require('../todoModel/todoModel'); // Adjust the path accordingly
 
 // Create a new todo
-router.post('/todos', async (req, res) => {
+router.post('/add', async (req, res) => {
   try {
     const { task } = req.body;
     const newTodo = new Todo({ task });
@@ -17,7 +17,7 @@ router.post('/todos', async (req, res) => {
 });
 
 // Get all todos
-router.get('/todos', async (req, res) => {
+router.get('/show', async (req, res) => {
   try {
     const todos = await Todo.find();
     res.json(todos);
