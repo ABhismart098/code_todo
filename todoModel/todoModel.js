@@ -1,20 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const todoSchema = new mongoose.Schema({
-  task: {
+  taskId: {
     type: String,
     required: true,
+    unique: true,
   },
-  completed: {
-    type: Boolean,
-    default: false,
+  taskTitle: {
+    type: String,
+    required: true,
+    trim: true,
   },
-  createdAt: {
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+  },
+  timeStamp: {
     type: Date,
     default: Date.now,
   },
-}, { collection: 'product' });  // Specify the collection name as 'production'
+  isTaskCompleted: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-const Todo = mongoose.model('Todo', todoSchema);
-
+const Todo = mongoose.model("Todo", todoSchema);
 module.exports = Todo;

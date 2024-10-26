@@ -1,31 +1,11 @@
-// Example usage in a route or controller file
-
 const express = require('express');
 const router = express.Router();
-const Todo = require('../todoModel/todoModel'); // Adjust the path accordingly
+const todoController = require('../controllers/todoControllers.js');
 
-// Create a new todo
-router.post('/todos', async (req, res) => {
-  try {
-    const { task } = req.body;
-    const newTodo = new Todo({ task });
-    await newTodo.save();
-    res.status(201).json(newTodo);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Get all todos
-router.get('/todos', async (req, res) => {
-  try {
-    const todos = await Todo.find();
-    res.json(todos);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Other routes for updating, deleting, etc. can be added here
+router.get('/', todoController.getAllTodos);
+router.get('/:id', todoController.getTodoById);
+router.post('/', todoController.createTodo);
+router.put('/:id', todoController.updateTodo);
+router.delete('/:id', todoController.deleteTodo);
 
 module.exports = router;
